@@ -1,0 +1,29 @@
+{
+  "name": "icpulse-scraper",
+  "version": "0.0.1",
+  "description": "ICPulse Scraper",
+  "scripts": {
+    "start": "env-cmd node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossChainLabs-ICP/icpulse-scraper.git"
+  },
+  "author": "CrossChain Labs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CrossChainLabs-ICP/icpulse-scraper/issues"
+  },
+  "homepage": "https://github.com/CrossChainLabs-ICP/icpulse-scraper#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cli-progress": "^3.11.0",
+    "date-fns": "^2.28.0",
+    "env-cmd": "^10.1.0",
+    "pg": "^8.7.1",
+    "postgres-migrations": "^5.3.0",
+    "time-stamp": "^2.2.0"
+  },
+  "devDependencies": {
+  }
+}

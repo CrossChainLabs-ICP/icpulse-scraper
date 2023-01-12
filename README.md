@@ -1,1 +1,1 @@
-# icpulse-scraper
+# ICPulse Scraper
