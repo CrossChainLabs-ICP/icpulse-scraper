@@ -1,0 +1,26 @@
+[
+{
+    "repo":"agent",
+    "organisation":"dfinity",
+    "filename":["package.json"],
+    "search_tag":"dfinity/agent"
+},
+{
+    "repo":"candid",
+    "organisation":"dfinity",
+    "filename":["package.json"],
+    "search_tag":"dfinity/candid"
+},
+{
+    "repo":"identity",
+    "organisation":"dfinity",
+    "filename":["package.json"],
+    "search_tag":"dfinity/identity"
+},
+{
+    "repo":"principal",
+    "organisation":"dfinity",
+    "filename":["package.json"],
+    "search_tag":"dfinity/principal"
+}
+]
