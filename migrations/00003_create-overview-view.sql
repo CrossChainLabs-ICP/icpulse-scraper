@@ -1,6 +1,6 @@
 CREATE MATERIALIZED VIEW IF NOT EXISTS overview_view
 AS
-    with
+with
         all_contributors as (
             with
                 contributors as ( SELECT DISTINCT dev_name FROM issues),
@@ -18,13 +18,13 @@ AS
             new_prs_last_month as (SELECT COUNT(id) as new_prs_last_month FROM issues WHERE (created_at > NOW() - INTERVAL '30 days') AND (is_pr = true)),
             new_repos_last_week as (SELECT COUNT(repo) as new_repos_last_week FROM repos WHERE created_at > NOW() - INTERVAL '7 days'),
             new_repos_last_month as (SELECT COUNT(repo) as new_repos_last_month FROM repos WHERE created_at > NOW() - INTERVAL '30 days'),
-
             commits_data as ( SELECT sum(contributions) as commits FROM devs_contributions),
             repos_data as (SELECT count(repo) as repos FROM repos),
             contributors_data as (SELECT count(DISTINCT dev_name) as contributors FROM all_contributors),
             prs_data as (SELECT count(id) as prs FROM issues WHERE is_pr = true),
             issues_open as (SELECT COUNT(id) as issues_open FROM issues WHERE (issue_state = 'open') AND (is_pr = false) ),
-            issues_closed as (SELECT COUNT(id) as issues_closed FROM issues WHERE (issue_state = 'closed') AND (is_pr = false))
+            issues_closed as (SELECT COUNT(id) as issues_closed FROM issues WHERE (issue_state = 'closed') AND (is_pr = false)),
+            active_contributors as ( SELECT count(DISTINCT dev_name) as active_contributors FROM commits WHERE commit_date > NOW() - INTERVAL '30 days')
 
     SELECT
         commits_data.commits,
@@ -40,7 +40,9 @@ AS
         new_prs_last_week.new_prs_last_week,
         new_prs_last_month.new_prs_last_month,
         issues_open.issues_open,
-        issues_closed.issues_closed
+        issues_closed.issues_closed,
+        new_contributors_last_month.new_contributors_last_month as new_contributors,
+        (active_contributors.active_contributors - new_contributors_last_month.new_contributors_last_month) as active_contributors
     FROM commits_data,
         new_commits_last_week,
         new_commits_last_month,
@@ -54,7 +56,8 @@ AS
         new_prs_last_week,
         new_prs_last_month,
         issues_open,
-        issues_closed
+        issues_closed,
+        active_contributors
 WITH DATA;
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_overview_view ON overview_view(commits, repos, contributors, prs, issues_open, issues_closed);
