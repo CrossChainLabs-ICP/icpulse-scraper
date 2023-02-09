@@ -828,7 +828,7 @@ class Scraper {
     return updated_repo_item;
 }
 
-  async SearchProjects() {
+  async searchProjects() {
     const pause = (timeout) =>
       new Promise((res) => setTimeout(res, timeout * 1000));
     let queries = [];
@@ -954,12 +954,91 @@ class Scraper {
     await db.saveRepos(repos);
   }
 
+  async getForks() {
+    let whitelisted_repos = [];
+    let requests = this.remaining_requests;
+    
+    let whitelisted_repos_result = await db.query(`SELECT * FROM repos_list WHERE repo_type = 'whitelisted';`);
+    if (whitelisted_repos_result?.rows) {
+        whitelisted_repos = whitelisted_repos_result?.rows;
+    }
+
+    INFO(`GetForks for ${whitelisted_repos.length} whitelisted repos`);
+
+    for (let i = 0; i < whitelisted_repos.length; i++) {
+        try {
+            let repo = whitelisted_repos[i].repo;
+            let org = whitelisted_repos[i].organisation;
+
+            let repo_full_name = org + '/' + repo;
+
+            let have_items = false;
+            let page = 1;
+
+            do {
+                let repos = [];
+                const respForks = await this.getWithRateLimitCheck(
+                    this.api + 'repos/' + repo_full_name + '/forks',
+                    {
+                        per_page: PER_PAGE,
+                        page: page,
+                    });
+
+                if (respForks?.data.length === PER_PAGE) {
+                    have_items = true;
+                    page++;
+                } else {
+                    have_items = false;
+                }
+
+                respForks?.data.forEach(fork => {
+                    let fields = fork?.full_name.split('/');
+                    let dep = [`${org}/${repo}`];
+                    
+                    repos.push({
+                        repo: fields[1],
+                        organisation: fields[0],
+                        repo_type: 'fork',
+                        dependencies: JSON.stringify(dep),
+                        created_at: fork?.created_at,
+                        default_branch: fork?.default_branch,
+                    });
+                });
+
+                for (const r of repos) {
+                    let branches = await this.getRepoBranches(r.repo, r.organisation, r.default_branch);
+
+                    for (const branch in branches) {
+                        await db.saveBranch({
+                            repo: r.repo,
+                            organisation: r.organisation,
+                            branch: branch,
+                            latest_commit_date: r.created_at
+                        });
+                    }
+                };
+
+                await db.saveRepos(repos);
+            } while (have_items);
+
+        } catch (e) {
+            ERROR(`GetForks: ${e}`);
+        }
+
+    }
+
+    requests = requests - this.remaining_requests;
+
+    INFO(`GetForks for ${whitelisted_repos.length} whitelisted repos done (used requests: ${requests})`);
+}
+
   async run() {
     STATUS("scraping");
 
     if (Date.now() - this.lastReposListUpdate > REPOS_LIST_UPDATE) {
       await this.getWhitelistedRepos();
-      await this.SearchProjects();
+      await this.getForks();
+      await this.searchProjects();
       this.lastReposListUpdate = Date.now();
     }
 
