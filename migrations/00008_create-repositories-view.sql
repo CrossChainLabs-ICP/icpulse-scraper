@@ -2,7 +2,7 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS repositories_view
 AS
     with
         repositories_core as (SELECT date_trunc('month', created_at)::date as month, count(repo) as repositories FROM repos WHERE repo_type = 'whitelisted' GROUP BY month),
-        repositories_ecosystem as (SELECT date_trunc('month', created_at)::date as month, count(repo) as repositories FROM repos WHERE repo_type = 'dependent' GROUP BY month)
+        repositories_ecosystem as (SELECT date_trunc('month', created_at)::date as month, count(repo) as repositories FROM repos WHERE repo_type != 'whitelisted' GROUP BY month)
     SELECT
         repositories_core.month,
         COALESCE(SUM(SUM(repositories_core.repositories)) OVER (ORDER BY repositories_core.month ASC), 0) AS repositories_core,
