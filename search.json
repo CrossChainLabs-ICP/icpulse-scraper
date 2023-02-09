@@ -1,26 +1,170 @@
 [
-{
-    "repo":"agent",
-    "organisation":"dfinity",
-    "filename":["package.json"],
-    "search_tag":"dfinity/agent"
-},
-{
-    "repo":"candid",
-    "organisation":"dfinity",
-    "filename":["package.json"],
-    "search_tag":"dfinity/candid"
-},
-{
-    "repo":"identity",
-    "organisation":"dfinity",
-    "filename":["package.json"],
-    "search_tag":"dfinity/identity"
-},
-{
-    "repo":"principal",
-    "organisation":"dfinity",
-    "filename":["package.json"],
-    "search_tag":"dfinity/principal"
-}
+    {
+        "repo": "principal",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/principal"
+    },
+    {
+        "repo": "agent",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/agent"
+    },
+    {
+        "repo": "candid",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/candid"
+    },
+    {
+        "repo": "identity",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/identity"
+    },
+    {
+        "repo": "auth-client",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/auth-client"
+    },
+    {
+        "repo": "assets",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/assets"
+    },
+    {
+        "repo": "bls-verify",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/bls-verify"
+    },
+    {
+        "repo": "service-worker",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/service-worker"
+    },
+    {
+        "repo": "dentity-secp256k1",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/identity-secp256k1"
+    },
+    {
+        "repo": "candid-wasm-bindgen",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/candid-wasm-bindgen"
+    },
+    {
+        "repo": "nns",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/nns"
+    },
+    {
+        "repo": "utils",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/utils"
+    },
+    {
+        "repo": "sns",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/sns"
+    },
+    {
+        "repo": "cmc",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/cmc"
+    },
+    {
+        "repo": "ledger",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/ledger"
+    },
+    {
+        "repo": "hardware-wallet-cli",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/hardware-wallet-cli"
+    },
+    {
+        "repo": "gix-components",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/gix-components"
+    },
+    {
+        "repo": "ii-login-button",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/ii-login-button"
+    },
+    {
+        "repo": "rosetta-client",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/rosetta-client"
+    },
+    {
+        "repo": "ckbtc",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/ckbtc"
+    },
+    {
+        "repo": "bootstrap",
+        "organisation": "dfinity",
+        "filename": [
+            "package.json"
+        ],
+        "search_tag": "dfinity/bootstrap"
+    }
 ]
