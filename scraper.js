@@ -1075,6 +1075,7 @@ class Scraper {
         await db.refreshView("recent_commits_view");
         await db.refreshView("repositories_view");
         await db.refreshView("activity_view");
+        await db.refreshView("active_repositories_view");
         INFO(`refresh views done`);
       }
     }
